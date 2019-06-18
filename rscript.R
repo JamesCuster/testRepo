@@ -1,1 +1,1 @@
-x <- read.csv("data/test.csv")
+sum(c(684,98496,651,6854))
