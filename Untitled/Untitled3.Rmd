@@ -1,0 +1,74 @@
+---
+title: Reversible R Markdown Document
+subtitle: Your subtitle
+author: Your Name
+date: Created `r Sys.Date()`
+output:
+  redoc::redoc:
+    highlight_outputs: yes
+    margins: 1
+    line_numbers: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is an example Reversible R Markdown document. It will preserve code
+elements for restoration in your final `.docx` file.
+
+You can use things like inline <!--- an HTML comment ---> comments.
+
+You can use code chunks to generate output and they will be restored:
+
+```{r cars}
+summary(cars)
+```
+
+Inline text
+-----------
+
+```{r, echo = FALSE, results = 'hide'}
+# A non-included chunk to provide inline chunks with values.
+a <- 2
+b <- 3
+```
+
+You can include calculations inline like so: `r a` plus
+`r b` equals `r a + b`. Even empty inline
+chunks `r NULL` will be stored and marked with hidden text in
+the Word document.
+
+Chunks with plots
+-----------------
+
+You can of course also embed plots, for example:
+
+```{r pressure, dev.args=list(bg='transparent')}
+plot(pressure)
+```
+
+Track Changes
+-------------
+
+**redoc** supports [Critic Markup](http://criticmarkup.com/users-guide.php)
+syntax for comments. You can {++ include ++} edits and they will be converted to
+{-- tacked --}{++ tracked ++} changes in your {==  Word document
+ ==}{>> Neat! <<}. By default {-- default --}, your system username is used as
+the author of changes, but this can be set with the `comment_author` argument in
+`redoc()` or your document YAML.
+
+{==  So if I add some changes here, what does it do? where does it go? Does it
+create a new word file? Does it overwrite the old? Lets test it out and see what
+happens.  ==}{>> Testing a tracked change in Rmarkdown <<}
+
+So what happens when I make changes in word without using tracked
+changes?[]{.paragraph-insertion author="Custer, James"
+date="2019-06-21T10:29:00Z"}
+
+[]{.paragraph-insertion author="Custer, James" date="2019-06-21T10:29:00Z"}
+
+{++ And what about what happens when I have track changes on? ++}
+
+
+df[, c("Hello", "bye")]
